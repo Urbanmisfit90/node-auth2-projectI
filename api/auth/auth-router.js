@@ -18,7 +18,7 @@ router.post("/register", validateRoleName, (req, res, next) => {
     }
    */
     const { username, password } = req.body;
-    const { role_name } = req
+    const {role_name} = req;
     const hash = bcrypt.hashSync(password, 8);
     User.add({ username, password: hash, role_name })
     .then(newUser => {
@@ -60,6 +60,7 @@ router.post("/login", checkUsernameExists, (req, res, next) => {
 });
 
 function buildToken(user) {
+  console.log(user)
   const payload = {
     subject: user.user_id,
     role_name: user.role_name,
